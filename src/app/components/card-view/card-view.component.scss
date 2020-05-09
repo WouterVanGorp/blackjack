@@ -1,0 +1,14 @@
+@import './../../../styles//sprite-variables.scss';
+
+.img {
+  background-image: url('./../../../assets/card_sprites.png');
+  background-repeat: no-repeat;
+  border-radius: 10px;
+
+  width: $card_width_init;
+  height: $card_height_init;
+}
+
+.aces {
+  background-position: $c1 - ($card_width_slide*12)  $r1;
+}
