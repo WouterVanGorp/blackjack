@@ -25,4 +25,14 @@ describe('DeckService', () => {
             expect(service.cards.length).toBe(52);
         });
     });
+
+    describe('shuffle', () => {
+        it('should shuffle the deck', () => {
+            service.create();
+            let cards = service.cards;
+            service.shuffle();
+            let shuffledCards = service.cards;
+            expect(shuffledCards).not.toEqual(cards);
+        });
+    });
 });

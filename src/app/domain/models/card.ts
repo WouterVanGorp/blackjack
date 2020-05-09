@@ -7,5 +7,6 @@ export enum Suit {
 
 export interface Card {
     suit: Suit;
-    value: number;
+    number: number;
+    value: number | number[];
 }

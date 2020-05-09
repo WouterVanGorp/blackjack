@@ -1,4 +1,5 @@
-import { Suit, Card } from '../models/card';
+import { Card } from '../models/card';
+import { CardFactory } from '../factories/card.factory';
 
 export class DeckService {
     private _cards: Card[] = [];
@@ -9,13 +10,7 @@ export class DeckService {
 
     public create() {
         // Create deck with every unique card
-        let suits = Object.keys(Suit).map(key => Number(key)).filter(n => !isNaN(n));
-        let values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-        for (let suit of suits) {
-            for (let value of values) {
-                this._cards.push({ suit, value });
-            }
-        }
+        this._cards = CardFactory.createNewDeck();
     }
 
     public clear() {
@@ -23,6 +18,7 @@ export class DeckService {
     }
 
     public shuffle() {
+        // Create copy of array
         var cards = [...this._cards];
         var currentIndex = cards.length, temporaryValue, randomIndex;
 
