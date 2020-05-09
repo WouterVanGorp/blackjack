@@ -3,12 +3,12 @@
 .img {
   background-image: url('./../../../assets/card_sprites.png');
   background-repeat: no-repeat;
-  border-radius: 10px;
+  border-radius: 8px;
 
   width: $card_width_init;
   height: $card_height_init;
 }
 
 .aces {
-  background-position: $c1 - ($card_width_slide*12)  $r1;
+  background-position: $c1  $r1 - $card_height_slide;
 }
