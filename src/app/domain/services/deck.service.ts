@@ -1,4 +1,5 @@
-import { Suit, Card, CardFactory } from '../models/card';
+import { Card } from '../models/card';
+import { CardFactory } from '../factories/card.factory';
 
 export class DeckService {
     private _cards: Card[] = [];

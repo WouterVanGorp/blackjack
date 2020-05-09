@@ -1,15 +1,4 @@
-export enum Suit {
-    Diamonds,
-    Clubs,
-    Hearts,
-    Spades
-}
-
-export interface Card {
-    suit: Suit;
-    number: number;
-    value: number | number[];
-}
+import { Card, Suit } from '../models/card';
 
 export class CardFactory {
     public static create(suit: Suit, number: number): Card {
