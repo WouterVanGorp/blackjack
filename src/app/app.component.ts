@@ -15,15 +15,13 @@ import { Publisher, RequestCardEvent, PassEvent } from '@domain/events';
   providers: [Publisher]
 })
 export class AppComponent implements OnInit {
-  private domain: Domain;
-
   card0: Card = { suit: Suit.Hearts, number: 9, value: [9], isOpen: false };
   card1: Card = { suit: Suit.Spades, number: 4, value: [4], isOpen: true };
   card2: Card = { suit: Suit.Diamonds, number: 12, value: [12, 2], isOpen: true }
 
   dealer$: Observable<any>;
 
-  constructor(private publisher: Publisher) {    
+  constructor(private publisher: Publisher, private domain: Domain) {    
   }
 
   ngOnInit(): void {
