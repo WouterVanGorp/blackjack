@@ -13,7 +13,6 @@ import { Hand } from '@domain/entities';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [Publisher]
 })
 export class AppComponent implements OnInit {
   dealer$: Observable<{ hand: Hand, role: PlayerType }>;
