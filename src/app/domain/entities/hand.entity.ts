@@ -7,11 +7,5 @@ export class Hand extends Entity {
 
     public add(card: Card) {
         this.cards.push(card);
-        let values = [0]
-        for (let card of this.cards) {
-            for (let cardValue of card.value) {
-                
-            }
-        }
     }
 }

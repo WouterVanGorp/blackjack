@@ -26,8 +26,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.setupListeners();
     this.domain.init();
+    this.setupListeners();
     this.publisher.publish(StartEvent);
   }
 
