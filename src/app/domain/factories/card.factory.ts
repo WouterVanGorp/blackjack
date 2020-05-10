@@ -1,4 +1,4 @@
-import { Card, Suit } from '../models/card';
+import { Card, Suit } from '../value-types/card.value';
 
 export class CardFactory {
     public static create(suit: Suit, number: number): Card {
@@ -14,6 +14,7 @@ export class CardFactory {
             suit,
             number,
             value,
+            isOpen: false,
         };
     }
 
