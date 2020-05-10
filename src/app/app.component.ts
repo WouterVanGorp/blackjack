@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { map, filter, tap } from 'rxjs/operators';
+import { map, filter, tap, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { Domain } from '@domain/domain';
@@ -32,19 +32,20 @@ export class AppComponent implements OnInit {
   private setupListeners() {
     this.dealer$ = this.publisher.listen(HandUpdatedEvent)
       .pipe(
-        tap(x => console.log({source: 'app.component', msg: x})),
-        filter(p => {
-          return p.for === PlayerType.Dealer;
-        }),
+        tap(x => console.log('test')),
+        filter(p => p.for === PlayerType.Dealer),
         map(p => ({ hand: p.newHand, role: p.for })),
+        startWith({ hand: new Hand() , role: PlayerType.Dealer }),
       );
 
     this.publisher.listen(HandUpdatedEvent).pipe(filter(p => p.for === PlayerType.Dealer)).subscribe(x => console.log(x));
 
     this.player$ = this.publisher.listen(HandUpdatedEvent)
       .pipe(
+        tap(x => console.log('test')),
         filter(p => p.for === PlayerType.Player),
         map(p => ({ hand: p.newHand, role: p.for })),
+        startWith({ hand: new Hand() , role: PlayerType.Player }),
       );
   }
 
