@@ -1,15 +1,15 @@
-import { Card } from '../models/card';
+import { Card } from '../value-types/card.value';
 import { CardFactory } from '../factories/card.factory';
+import { Entity } from './entity';
 
-export class DeckService {
+export class DeckEntity extends Entity {
     private _cards: Card[] = [];
 
-    public get cards(): Card[] {
+    public get cards(): ReadonlyArray<Card> {
         return this._cards;
     }
 
     public create() {
-        // Create deck with every unique card
         this._cards = CardFactory.createNewDeck();
     }
 
@@ -24,7 +24,6 @@ export class DeckService {
 
         // While there remain elements to shuffle...
         while (0 !== currentIndex) {
-
             // Pick a remaining element...
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex -= 1;

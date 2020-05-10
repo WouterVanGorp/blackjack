@@ -1,14 +1,14 @@
 import { TestBed } from "@angular/core/testing"
-import { DeckService } from './deck.service'
+import { DeckEntity } from './deck.entity'
 
 describe('DeckService', () => {
-    let service: DeckService;
+    let service: DeckEntity;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [DeckService]
+            providers: [DeckEntity]
         });
-        service = TestBed.get(DeckService);
+        service = TestBed.get(DeckEntity);
     });
 
     it('should create',  () =>{

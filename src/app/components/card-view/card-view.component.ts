@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Card } from './../../domain/models/card';
+import { Card } from '@domain/value-types';
 
 @Component({
   selector: 'app-card-view',
