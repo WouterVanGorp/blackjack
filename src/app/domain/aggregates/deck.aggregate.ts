@@ -7,7 +7,7 @@ import { ResumeEvent } from '@domain/events/ui';
 import { Injectable } from '@angular/core';
 
 @Injectable({providedIn: 'root'})
-export class Deck extends Aggregate {
+export class DeckAggregate extends Aggregate {
     private _self: PlayerType = PlayerType.Deck;
     private _deck: DeckEntity = new DeckEntity();
     private _turnCount: number = 0;

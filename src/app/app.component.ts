@@ -16,12 +16,13 @@ import { Hand } from '@domain/entities';
   providers: [Publisher]
 })
 export class AppComponent implements OnInit {
-  private domain: Domain = new Domain();
-
   dealer$: Observable<{ hand: Hand, role: PlayerType }>;
   player$: Observable<{ hand: Hand, role: PlayerType }>;
 
-  constructor(private publisher: Publisher) {
+  constructor(
+    private publisher: Publisher,
+    private domain: Domain,
+  ) {
   }
 
   ngOnInit(): void {

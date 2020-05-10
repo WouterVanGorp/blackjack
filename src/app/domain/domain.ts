@@ -1,4 +1,4 @@
-import { Dealer as DealerAggregate, Deck as DeckAggregate, PlayerAggregate, TurnAggregate } from '@domain/aggregates';
+import { DealerAggregate as DealerAggregate, DeckAggregate as DeckAggregate, PlayerAggregate, TurnAggregate } from '@domain/aggregates';
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
