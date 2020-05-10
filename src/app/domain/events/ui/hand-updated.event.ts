@@ -24,7 +24,7 @@ export class HandUpdatedEvent extends DomainEvent {
     /**
      * What new card the player gained
      */
-    public newCard: Card;
+    public newCards: Card[];
 
     /**
      * Difference in total hand value

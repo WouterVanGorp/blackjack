@@ -7,5 +7,5 @@ export class GiveEvent extends DomainEvent {
     }
 
     public to: PlayerType;
-    public card: Card;
+    public cards: Card[];
 }

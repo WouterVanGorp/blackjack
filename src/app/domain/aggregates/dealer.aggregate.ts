@@ -17,10 +17,10 @@ export class DealerAggregate extends Aggregate {
 
     public init() {
         this.publisher.listen(GiveEvent).pipe(filter(x => x.to === this._self)).subscribe(x => {
-            this._hand.add(x.card);
+            this._hand.add(...x.cards);
             this.publisher.publish(HandUpdatedEvent, {
                 for: this._self,
-                newCard: x.card,
+                newCards: x.cards,
                 newHand: this._hand,
                 diffValue: [0],
                 previousHand: null,

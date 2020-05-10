@@ -7,6 +7,10 @@ import { DomainEvent } from './domain.event';
 export class Publisher implements OnDestroy {
     private _publisher = new Subject<PublishedEvent>();
 
+    public constructor() {
+        this._publisher.subscribe(x => console.log(x));
+    }
+
     public publish<T extends DomainEvent>(type: Type<T>, payload?: T) {
         this._publisher.next({
             type,
@@ -19,7 +23,9 @@ export class Publisher implements OnDestroy {
     }
 
     public listen<T extends DomainEvent>(type: Type<T>): Observable<T> {
-        return this._publisher.pipe(filter(e => e.type === type), map(e => e.payload));
+        return this._publisher.pipe(filter(e => {
+            return e.type === type;
+        }), map(e => e.payload));
     }
 
     public ngOnDestroy(): void {
