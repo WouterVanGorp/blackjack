@@ -1,0 +1,8 @@
+<div *ngFor="let card of player.hand" >
+  <app-card-view [card]="card" ></app-card-view>
+</div>
+
+<div *ngIf="isPlayer()" class="buttons">
+  <button class="hit" click="onHit()">HIT</button>
+  <button class="stop" click="onPass()">PASS</button>
+</div>

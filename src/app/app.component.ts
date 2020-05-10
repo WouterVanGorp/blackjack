@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
-import {  map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { Domain } from '@domain/domain';
 import { Card, Suit, PlayerType } from '@domain/value-types';
 import { StartEvent, HandUpdatedEvent } from '@domain/events/ui';
 import { Publisher, RequestCardEvent, PassEvent } from '@domain/events';
+import { Hand } from '@domain/entities';
 
 @Component({
   selector: 'app-root',
@@ -15,24 +16,37 @@ import { Publisher, RequestCardEvent, PassEvent } from '@domain/events';
   providers: [Publisher]
 })
 export class AppComponent implements OnInit {
-  private domain: Domain;
+  private domain: Domain = new Domain();
 
-  card0: Card = { suit: Suit.Hearts, number: 9, value: [9], isOpen: false };
-  card1: Card = { suit: Suit.Spades, number: 4, value: [4], isOpen: true };
-  card2: Card = { suit: Suit.Diamonds, number: 12, value: [12, 2], isOpen: true }
+  dealer$: Observable<{ hand: Hand, role: PlayerType }>;
+  player$: Observable<{ hand: Hand, role: PlayerType }>;
 
-  dealer$: Observable<any>;
-
-  constructor(private publisher: Publisher) {    
+  constructor(private publisher: Publisher) {
   }
 
   ngOnInit(): void {
+    this.setupListeners();
     this.domain.init();
-    
     this.publisher.publish(StartEvent);
+  }
 
+  private setupListeners() {
     this.dealer$ = this.publisher.listen(HandUpdatedEvent)
-    .pipe(map(p => p.newHand));
+      .pipe(
+        filter(p => p.for === PlayerType.Dealer),
+        map(p => ({ hand: p.newHand, role: p.for })),
+      );
+
+    this.player$ = this.publisher.listen(HandUpdatedEvent)
+      .pipe(
+        filter(p => p.for === PlayerType.Player),
+        map(p => ({ hand: p.newHand, role: p.for })),
+      );
+  }
+
+  userAction(action : 'HIT' | 'PASS') {
+    if(action === 'HIT') this.onHit();
+    else if(action === 'PASS') this.onPass();
   }
 
   onHit = () => this.publisher.publish(RequestCardEvent, new RequestCardEvent({ who: PlayerType.Player }));

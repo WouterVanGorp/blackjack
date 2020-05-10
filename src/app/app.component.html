@@ -1,13 +1,7 @@
-<div class="fixed dealer">
-  <app-card-view [card]="card0"></app-card-view>
-  <app-card-view [card]="card1"></app-card-view>
+<div class="fixed dealer" *ngIf="dealer$ | async as dealer">
+<app-play-area [player]="dealer" ></app-play-area>
 </div>
 
-<div class="fixed player">
-  <app-card-view [card]="card2"></app-card-view>
-
-  <div class="buttons">
-    <button class="hit" click="onHit()">HIT</button>
-    <button class="stop" click="onPass()">PASS</button>
-  </div>
+<div class="fixed player"  *ngIf="player$ | async as player">
+<app-play-area [player]="player" (userAction)="userAction($event)"></app-play-area>
 </div>

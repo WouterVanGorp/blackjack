@@ -1,0 +1,42 @@
+.buttons {
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+
+  button {
+    display: block;
+    margin: 5px;
+    padding: 10px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100px;
+    border-radius: 30px;
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  .stop {
+    background-color: red;
+
+    &:hover {
+      background-color: hotpink;
+    }
+  }
+
+  .hit {
+    background-color: green;
+
+    &:hover {
+      background-color: greenyellow;
+    }
+  }
+}
+
+app-card-view {
+  display: inline-block;
+  margin-right: 5px;
+}
