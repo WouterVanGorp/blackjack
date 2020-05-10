@@ -7,3 +7,24 @@
     bottom: 0;
   }
 }
+
+.startBtn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-weight: 900;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+
+  background-color: green;
+  &:hover {
+    background-color: greenyellow;
+    color: black;
+  }
+}
