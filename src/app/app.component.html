@@ -1,13 +1,13 @@
 <div class="fixed dealer">
+  <app-card-view [card]="card0"></app-card-view>
   <app-card-view [card]="card1"></app-card-view>
-  <app-card-view [card]="card2"></app-card-view>
 </div>
 
 <div class="fixed player">
   <app-card-view [card]="card2"></app-card-view>
 
   <div class="buttons">
-    <button class="hit">HIT</button>
-    <button class="stop">PASS</button>
+    <button class="hit" click="onHit()">HIT</button>
+    <button class="stop" click="onPass()">PASS</button>
   </div>
 </div>

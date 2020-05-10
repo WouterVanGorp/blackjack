@@ -1,8 +1,8 @@
 import { DomainEvent } from './domain.event';
 import { PlayerType } from '../value-types';
 
-export class RequestEvent extends DomainEvent {
-    public constructor(init: RequestEvent) {
+export class RequestCardEvent extends DomainEvent {
+    public constructor(init: RequestCardEvent) {
         super(init);
     }
     
