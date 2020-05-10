@@ -2,11 +2,11 @@
   <app-play-area [player]="dealer"></app-play-area>
 </div>
 
-<div class="fixed player"  *ngIf="player$ | async as player">
+<div class="fixed player" *ngIf="player$ | async as player">
   <app-play-area
     [player]="player"
     (userAction)="userAction($event)"
   ></app-play-area>
 </div>
 
-<button class="startBtn" *ngIf="!gameOngoing" (click)="start()" >Start</button>
+<button class="startBtn" *ngIf="!gameOngoing" (click)="start()">Start</button>
