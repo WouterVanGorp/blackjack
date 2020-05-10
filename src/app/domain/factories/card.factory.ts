@@ -3,9 +3,9 @@ import { Card, Suit } from '../value-types/card.value';
 export class CardFactory {
     public static create(suit: Suit, number: number): Card {
         // Compute value
-        let value: number | number[] = number;
+        let value = [number];
         if (number > 10) {
-            value = 10
+            value = [10]
         } else if (number === 1) {
             value = [1, 11];
         }

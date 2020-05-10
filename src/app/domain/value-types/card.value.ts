@@ -10,6 +10,6 @@ export enum Suit {
 export interface Card extends ValueType {
     suit: Suit;
     number: number;
-    value: number | number[];
+    value: number[];
     isOpen: boolean;
 }
