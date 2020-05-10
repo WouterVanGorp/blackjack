@@ -10,6 +10,9 @@ import { Card } from '@domain/value-types';
 export class CardViewComponent {
   @Input() card: Card;
 
-  getCol = (): number =>  -10 - (61.46 * (this.card.number -1));
-  getRow = (): number =>  -40 - (92 * this.card.suit)
+  getCol = (): number =>  this.card.isOpen ? this.calcCol(this.card.number) : this.calcCol(1);
+  getRow = (): number =>  this.card.isOpen ? this.calcRow(this.card.suit) : this.calcRow(4);
+
+  calcCol = (cardNumber: number): number => -10 - (61.46 * (cardNumber -1));
+  calcRow = (cardSuit: number): number => -40 - (92 * cardSuit);
 }
