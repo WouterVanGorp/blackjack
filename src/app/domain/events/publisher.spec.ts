@@ -1,7 +1,7 @@
 import { Publisher } from "./publisher"
 import { TestBed, async } from '@angular/core/testing';
-import { StartEvent } from './start.event';
-import { WinEvent } from './win.event';
+import { StartEvent } from './ui/start.event';
+import { ResumeEvent } from './ui';
 
 describe('Publisher', () => {
     let publisher: Publisher;
@@ -34,7 +34,7 @@ describe('Publisher', () => {
 
     it('should not receive message when different event is published', async(() => {
         publisher.listen(StartEvent).subscribe(x => expect(true).toBeFalse());
-        publisher.publish(WinEvent);
+        publisher.publish(ResumeEvent);
         expect().nothing();
     }));
 });

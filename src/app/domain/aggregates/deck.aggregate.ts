@@ -2,7 +2,8 @@ import { Aggregate } from './aggregate';
 import { DeckEntity } from '../entities';
 import { filter } from 'rxjs/operators';
 import { PlayerType } from '../value-types';
-import { GiveEvent, Publisher, TurnEvent, ResumeEvent, RequestEvent } from '../events';
+import { GiveEvent, Publisher, TurnEvent, RequestEvent } from '../events';
+import { ResumeEvent } from '@domain/events/ui';
 
 export class Deck extends Aggregate {
     private _self: PlayerType = PlayerType.Deck;
