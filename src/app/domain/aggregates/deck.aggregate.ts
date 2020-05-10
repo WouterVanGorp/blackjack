@@ -2,7 +2,7 @@ import { Aggregate } from './aggregate';
 import { DeckEntity } from '../entities';
 import { filter } from 'rxjs/operators';
 import { PlayerType } from '../value-types';
-import { GiveEvent, Publisher, TurnEvent, RequestEvent } from '../events';
+import { GiveEvent, Publisher, TurnEvent, RequestCardEvent } from '../events';
 import { ResumeEvent } from '@domain/events/ui';
 
 export class Deck extends Aggregate {
@@ -30,7 +30,7 @@ export class Deck extends Aggregate {
             this._turnCount = turn + 1;
         });
 
-        this.publisher.listen(RequestEvent).subscribe(x => {
+        this.publisher.listen(RequestCardEvent).subscribe(x => {
             let card = this._deck.draw();
             card.isOpen = true;
             this.publisher.publish(GiveEvent, {card, to: x.who});
