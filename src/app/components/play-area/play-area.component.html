@@ -4,6 +4,6 @@
 ></app-card-view>
 
 <div *ngIf="isPlayer()" class="buttons">
-  <button class="hit" click="onHit()">HIT</button>
-  <button class="stop" click="onPass()">PASS</button>
+  <button class="hit" (click)="onHit()">HIT</button>
+  <button class="stop" (click)="onPass()">PASS</button>
 </div>
