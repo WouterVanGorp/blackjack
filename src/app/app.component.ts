@@ -34,7 +34,6 @@ export class AppComponent implements OnInit {
   private setupListeners() {
     this.dealer$ = this.publisher.listen(HandUpdatedEvent)
       .pipe(
-        tap(x => console.log('test')),
         filter(p => p.for === PlayerType.Dealer),
         map(p => ({ hand: p.newHand, role: p.for })),
       );
@@ -43,7 +42,6 @@ export class AppComponent implements OnInit {
 
     this.player$ = this.publisher.listen(HandUpdatedEvent)
       .pipe(
-        tap(x => console.log('test')),
         filter(p => p.for === PlayerType.Player),
         map(p => ({ hand: p.newHand, role: p.for })),
       );
