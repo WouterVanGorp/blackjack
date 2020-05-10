@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Card, Suit } from './domain/models/card';
+import { Card, Suit } from '@domain/value-types';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +8,6 @@ import { Card, Suit } from './domain/models/card';
 })
 export class AppComponent {
 
-  card1: Card = { suit: Suit.Spades, number: 4, value: 4 };
-  card2: Card = { suit: Suit.Diamonds, number: 12, value: [12, 2] }
+  card1: Card = { suit: Suit.Spades, number: 4, value: 4, isOpen: true };
+  card2: Card = { suit: Suit.Diamonds, number: 12, value: [12, 2], isOpen: true }
 }
