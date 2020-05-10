@@ -3,7 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { DomainEvent } from './domain.event';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class Publisher implements OnDestroy {
     private _publisher = new Subject<PublishedEvent>();
 

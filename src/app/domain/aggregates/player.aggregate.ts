@@ -2,7 +2,9 @@ import { Aggregate } from './aggregate';
 import { Publisher, GiveEvent } from '@domain/events';
 import { filter } from 'rxjs/operators';
 import { PlayerType } from '@domain/value-types';
+import { Injectable } from '@angular/core';
 
+@Injectable({providedIn: 'root'})
 export class PlayerAggregate extends Aggregate {
     private _self: PlayerType = PlayerType.Player;
 

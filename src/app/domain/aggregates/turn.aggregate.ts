@@ -2,7 +2,9 @@ import { Aggregate } from './aggregate';
 import { Publisher, TurnEvent, PassEvent } from '@domain/events';
 import { StartEvent } from '@domain/events/ui';
 import { PlayerType } from '@domain/value-types';
+import { Injectable } from '@angular/core';
 
+@Injectable({providedIn: 'root'})
 export class TurnAggregate extends Aggregate {
     public constructor(private publisher: Publisher) {
         super();

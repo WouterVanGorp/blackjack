@@ -1,10 +1,9 @@
 import { Dealer as DealerAggregate, Deck as DeckAggregate, PlayerAggregate, TurnAggregate } from '@domain/aggregates';
+import { Injectable } from '@angular/core';
 
+@Injectable({providedIn: 'root'})
 export class Domain {
-    public dealer: DealerAggregate = new DealerAggregate();
-    public deck: DeckAggregate = new DeckAggregate();
-    public player: PlayerAggregate = new PlayerAggregate();
-    public turn: TurnAggregate = new TurnAggregate();
+    public constructor(public dealer: DealerAggregate, public deck: DeckAggregate, public player: PlayerAggregate, public turn: TurnAggregate) {}
 
     public init() {
         this.dealer.init();
