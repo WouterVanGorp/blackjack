@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Card, Suit, PlayerType } from '@domain/value-types';
-import { Publisher, RequestCardEvent, PassEvent } from '@domain/events';
-import { StartEvent, HandUpdatedEvent } from '@domain/events/ui';
-import { filter, map } from 'rxjs/operators';
+
+import {  map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+
+import { Domain } from '@domain/domain';
+import { Card, Suit, PlayerType } from '@domain/value-types';
+import { StartEvent, HandUpdatedEvent } from '@domain/events/ui';
+import { Publisher, RequestCardEvent, PassEvent } from '@domain/events';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +15,7 @@ import { Observable } from 'rxjs';
   providers: [Publisher]
 })
 export class AppComponent implements OnInit {
+  private domain: Domain;
 
   card0: Card = { suit: Suit.Hearts, number: 9, value: [9], isOpen: false };
   card1: Card = { suit: Suit.Spades, number: 4, value: [4], isOpen: true };
@@ -23,6 +27,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.domain.init();
+    
     this.publisher.publish(StartEvent);
 
     this.dealer$ = this.publisher.listen(HandUpdatedEvent)
