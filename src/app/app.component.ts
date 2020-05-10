@@ -4,10 +4,10 @@ import { map, filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { Domain } from '@domain/domain';
-import { Card, Suit, PlayerType } from '@domain/value-types';
+import { Hand } from '@domain/entities';
+import { PlayerType } from '@domain/value-types';
 import { StartEvent, HandUpdatedEvent } from '@domain/events/ui';
 import { Publisher, RequestCardEvent, PassEvent } from '@domain/events';
-import { Hand } from '@domain/entities';
 
 @Component({
   selector: 'app-root',
@@ -21,8 +21,7 @@ export class AppComponent implements OnInit {
   constructor(
     private publisher: Publisher,
     private domain: Domain,
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.domain.init();
