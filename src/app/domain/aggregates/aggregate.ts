@@ -1,3 +1,5 @@
 import { Entity } from '../entities/entity';
 
-export abstract class Aggregate extends Entity {}
+export abstract class Aggregate extends Entity {
+    public init() {}
+}

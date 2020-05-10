@@ -1,7 +1,7 @@
-import { Entity } from '../entities/entity';
 import { DeckEntity, Hand } from '../entities';
+import { Aggregate } from './aggregate';
 
-export class Dealer extends Entity {
+export class Dealer extends Aggregate {
     deck: DeckEntity;
     hand: Hand;
 }
