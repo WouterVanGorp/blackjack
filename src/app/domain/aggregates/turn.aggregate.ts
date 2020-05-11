@@ -28,7 +28,7 @@ export class TurnAggregate extends Aggregate {
                     next = PlayerType.Dealer;
                     break;
             }
-            if (next) {
+            if (next != null) {
                 this.publisher.publish(TurnEvent, { for: next });
             }
         })
