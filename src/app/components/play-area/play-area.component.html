@@ -4,6 +4,11 @@
 ></app-card-view>
 
 <div *ngIf="isPlayer()" class="buttons">
-  <button class="hit" (click)="onHit()">HIT</button>
-  <button class="stop" (click)="onPass()">PASS</button>
+  <button class="hit" [disabled]="player.bust || passed" (click)="onHit()">HIT</button>
+  <button class="stop" [disabled]="player.bust || passed" (click)="onPass()">PASS</button>
+</div>
+
+
+<div class="bust" *ngIf="player.bust" >
+  BOOM, YOU DEAD!
 </div>

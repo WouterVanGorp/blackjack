@@ -9,12 +9,17 @@ import { PlayerType } from '@domain/value-types';
 })
 export class PlayAreaComponent {
 
-  @Input() player: { hand: Hand, role: PlayerType };
+  @Input() player: { hand: Hand, role: PlayerType, bust: boolean };
 
   @Output() userAction: EventEmitter<'HIT' | 'PASS'> = new EventEmitter<'HIT' | 'PASS'>();
+
+  public passed = false;
 
   isPlayer = () => this.player.role === PlayerType.Player;
 
   onHit = () => this.userAction.emit('HIT');
-  onPass = () => this.userAction.emit('PASS');
+  onPass = () => {
+    this.userAction.emit('PASS');
+    this.passed = true;
+  };
 }
