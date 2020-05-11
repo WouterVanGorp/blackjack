@@ -1,13 +1,23 @@
-<app-card-view
-  *ngFor="let card of player.hand.cards"
-  [card]="card"
-></app-card-view>
-
-<div *ngIf="isPlayer()" class="buttons">
-  <button class="hit" [disabled]="player.bust || passed" (click)="onHit()">HIT</button>
-  <button class="stop" [disabled]="player.bust || passed" (click)="onPass()">PASS</button>
+<div class="play_area">
+  <app-card-view
+    *ngFor="let card of player.hand.cards"
+    [card]="card"
+  ></app-card-view>
 </div>
 
-<div class="bust" *ngIf="player.bust" >
+<div *ngIf="isPlayer()" class="buttons">
+  <button class="hit" [disabled]="player.bust || passed" (click)="onHit()">
+    HIT
+  </button>
+  <button class="stop" [disabled]="player.bust || passed" (click)="onPass()">
+    PASS
+  </button>
+</div>
+
+<div class="value">
+  <span>{{ player.hand.value }}</span>
+</div>
+
+<div class="bust" *ngIf="player.bust">
   BOOM, YOU DEAD!
 </div>
