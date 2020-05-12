@@ -19,6 +19,11 @@
   height: $card_height_init;
 
   animation: flip 1s;
+  transition: transform 0.2s;
+}
+
+.img:hover {
+  transform: scale(1.1);
 }
 
 .aces {
