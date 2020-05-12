@@ -20,7 +20,7 @@ export class DeckAggregate extends Aggregate {
             this._deck.create();
             this._deck.shuffle();
             this.giveCard(PlayerType.Player, [true, true]);
-            this.giveCard(PlayerType.Dealer, [false, true]);
+            this.giveCard(PlayerType.Dealer, [true, false]);
         });
 
         this.publisher.listen(RequestCardEvent).subscribe(x => {

@@ -1,4 +1,4 @@
-import { Card } from '../value-types/card.value';
+import { Card, Suit } from '../value-types/card.value';
 import { CardFactory } from '../factories/card.factory';
 import { Entity } from './entity';
 
@@ -37,7 +37,15 @@ export class DeckEntity extends Entity {
         this._cards = cards;
     }
 
+    public cheat(cardValues: number[]) {
+        let cards: Card[] = cardValues.map(n => CardFactory.create(CardFactory.randomSuit(), n));
+        this._cards = cards;
+    }
+
     public draw(): Card {
-        return this._cards.pop();
+        let newCards = [...this._cards];
+        let card = newCards.shift();
+        this._cards = newCards;
+        return card;
     }
 }

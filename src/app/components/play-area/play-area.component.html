@@ -1,6 +1,6 @@
 <div class="play_area">
   <app-card-view
-    *ngFor="let card of player.hand.cards"
+    *ngFor="let card of player.hand.cards; trackBy: trackByFn"
     [card]="card"
   ></app-card-view>
 </div>

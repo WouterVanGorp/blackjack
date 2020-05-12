@@ -7,8 +7,16 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Launch Chrome against localhost",
+            "name": "Launch Chrome",
             "url": "http://localhost:4200",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "chrome",
+            "request": "attach",
+            "name": "Attach Chrome",
+            "urlFilter": "http://localhost:4200*",
+            "port": 9222,
             "webRoot": "${workspaceFolder}"
         }
     ]

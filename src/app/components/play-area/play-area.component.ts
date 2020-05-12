@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChange } from '@angular/core';
 import { Hand } from '@domain/entities';
-import { PlayerType } from '@domain/value-types';
+import { PlayerType, Card } from '@domain/value-types';
 
 @Component({
   selector: 'app-play-area',
@@ -22,4 +22,10 @@ export class PlayAreaComponent {
     this.userAction.emit('PASS');
     this.passed = true;
   };
+
+  trackByFn(index: number, item: Card) {
+    if (item.isOpen)
+      return index;
+    return -1;
+  }
 }

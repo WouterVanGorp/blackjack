@@ -4,9 +4,9 @@ import { filter } from 'rxjs/operators';
 import { PlayerType } from '@domain/value-types';
 import { Injectable } from '@angular/core';
 import { Hand } from '@domain/entities';
-import { HandUpdatedEvent } from '@domain/events/ui';
+import { HandUpdatedEvent, BustEvent } from '@domain/events/ui';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class PlayerAggregate extends Aggregate {
     private _self: PlayerType = PlayerType.Player;
     private _hand: Hand = new Hand();
@@ -25,6 +25,9 @@ export class PlayerAggregate extends Aggregate {
                 diffValue: [0],
                 previousHand: null,
             });
+            if (this._hand.value > 21) {
+                this.publisher.publish(BustEvent, { who: PlayerType.Player });
+            }
         });
     }
 }

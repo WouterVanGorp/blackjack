@@ -14,7 +14,7 @@ export class Publisher implements OnDestroy {
     public publish<T extends DomainEvent>(type: Type<T>, payload?: T) {
         this._publisher.next({
             type,
-            payload,
+            payload: {...payload},
         });
     }
 

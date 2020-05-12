@@ -1,5 +1,15 @@
 @import './../../../styles/sprite-variables.scss';
 
+@keyframes fade-in {
+  0% {opacity: 0%;}
+  100% {opacity: 100%;}
+}
+
+@keyframes flip {
+  0% {transform: rotateY(90deg);}
+  100% {transform: rotateY(0);}
+}
+
 .img {
   background-image: url('./../../../assets/card_sprites.png');
   background-repeat: no-repeat;
@@ -7,6 +17,8 @@
 
   width: $card_width_init;
   height: $card_height_init;
+
+  animation: flip 1s;
 }
 
 .aces {

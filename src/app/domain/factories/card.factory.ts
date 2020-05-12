@@ -1,6 +1,8 @@
 import { Card, Suit } from '../value-types/card.value';
 
 export class CardFactory {
+    public static suits: Suit[] = [Suit.Diamonds, Suit.Clubs, Suit.Hearts, Suit.Spades];
+
     public static create(suit: Suit, number: number): Card {
         // Compute value
         let value = [number];
@@ -28,5 +30,9 @@ export class CardFactory {
             }
         }
         return cards;
+    }
+
+    public static randomSuit(): Suit {
+        return CardFactory.suits[Math.floor(Math.random() * 4)];
     }
 }

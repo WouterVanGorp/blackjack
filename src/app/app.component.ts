@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 
-import { map, filter, tap, startWith } from 'rxjs/operators';
+import { map, filter, tap, startWith, pluck } from 'rxjs/operators';
 import { Observable, combineLatest } from 'rxjs';
 
 import { Domain } from '@domain/domain';
@@ -8,6 +8,7 @@ import { Hand } from '@domain/entities';
 import { PlayerType } from '@domain/value-types';
 import { StartEvent, HandUpdatedEvent, BustEvent } from '@domain/events/ui';
 import { Publisher, RequestCardEvent, PassEvent } from '@domain/events';
+import { lag } from './operators';
 
 @Component({
   selector: 'app-root',
@@ -32,17 +33,23 @@ export class AppComponent implements OnInit {
   }
 
   private setupListeners() {
-    const handUpdatedDealer$ = this.publisher.listen(HandUpdatedEvent).pipe(filter(p => p.for === PlayerType.Dealer));
-    const handUpdatedPlayer$ = this.publisher.listen(HandUpdatedEvent).pipe(filter(p => p.for === PlayerType.Player));
+    const dealerEvents$ = combineLatest(
+      this.publisher.listen(HandUpdatedEvent).pipe(filter(p => p.for === PlayerType.Dealer)),
+      this.publisher.listen(BustEvent).pipe(filter(p => p.who === PlayerType.Dealer), map(_ => true), startWith(false)),
+      this.publisher.listen(PassEvent).pipe(filter(p => p.who === PlayerType.Dealer), map(_ => true), startWith(false)),
+    ).pipe(
+      map(([handUpdated, bust, pass]) => ({handUpdated, bust, pass})),
+      lag(1000)
+    );
 
-    const bustDealer$ = this.publisher.listen(BustEvent).pipe(filter(p => p.who === PlayerType.Dealer), map(_ => true), startWith(false));
+    const handUpdatedPlayer$ = this.publisher.listen(HandUpdatedEvent).pipe(filter(p => p.for === PlayerType.Player));
     const bustPlayer$ = this.publisher.listen(BustEvent).pipe(filter(p => p.who === PlayerType.Player), map(_ => true), startWith(false));
 
-    this.dealer$ = combineLatest([handUpdatedDealer$, bustDealer$])
+    this.dealer$ = combineLatest([dealerEvents$.pipe(pluck('handUpdated')), dealerEvents$.pipe(pluck('bust'))])
       .pipe(map(([p, b]) => ({ hand: p.newHand, role: p.for, bust: b })));
 
-    this.player$ = combineLatest([handUpdatedPlayer$, bustPlayer$])
-      .pipe(map(([p, b]) => ({ hand: p.newHand, role: p.for, bust: b })));
+    this.player$ = combineLatest([handUpdatedPlayer$, bustPlayer$, dealerEvents$.pipe(pluck('pass'))])
+      .pipe(map(([p, b, d]) => ({ hand: p.newHand, role: p.for, bust: b || d })));
   }
 
   userAction(action: 'HIT' | 'PASS') {
