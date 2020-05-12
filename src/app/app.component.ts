@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 
-import { map, filter, tap, startWith, pluck } from 'rxjs/operators';
-import { Observable, combineLatest } from 'rxjs';
+import { Observable, combineLatest, from, fromEvent } from 'rxjs';
+import { map, filter, tap, startWith, pluck, takeUntil } from 'rxjs/operators';
 
 import { Domain } from '@domain/domain';
 import { Hand } from '@domain/entities';
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
       this.publisher.listen(BustEvent).pipe(filter(p => p.who === PlayerType.Dealer), map(_ => true), startWith(false)),
       this.publisher.listen(PassEvent).pipe(filter(p => p.who === PlayerType.Dealer), map(_ => true), startWith(false)),
     ).pipe(
-      map(([handUpdated, bust, pass]) => ({handUpdated, bust, pass})),
+      map(([handUpdated, bust, pass]) => ({ handUpdated, bust, pass })),
       lag(1000)
     );
 
@@ -50,6 +50,17 @@ export class AppComponent implements OnInit {
 
     this.player$ = combineLatest([handUpdatedPlayer$, bustPlayer$, dealerEvents$.pipe(pluck('pass'))])
       .pipe(map(([p, b, d]) => ({ hand: p.newHand, role: p.for, bust: b || d })));
+
+    fromEvent<KeyboardEvent>(document, 'keydown').pipe(
+      tap(console.log),
+      takeUntil(this.publisher.listen(PassEvent).pipe(filter(p => p.who === PlayerType.Player)))
+    ).subscribe(x => {
+      if (x.code === 'Space') {
+        this.userAction('HIT');
+      } else if (x.code === 'Escape') {
+        this.userAction('PASS');
+      }
+    })
   }
 
   userAction(action: 'HIT' | 'PASS') {
